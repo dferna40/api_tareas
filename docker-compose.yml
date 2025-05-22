@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  mysql_tareas:
+    image: mysql:8.0
+    container_name: mysql_tareas
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tareas_db
+      MYSQL_USER: david
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - api_tareas_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  springboot_tareas:
+    build:
+      context: .
+    container_name: springboot_tareas
+    depends_on:
+      mysql_tareas:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+	  SPRING_PROFILES_ACTIVE: docker  # <-- Aquí activamos el perfil
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_tareas:3306/tareas_db
+      SPRING_DATASOURCE_USERNAME: david
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+volumes:
+  api_tareas_mysql_data:

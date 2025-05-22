@@ -1,0 +1,7 @@
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\ApiTareasApplication.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\controller\TareaController.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\dto\TareaDTO.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\model\Tarea.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\repository\TareaRepository.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\service\TareaService.java
+D:\David_desarollo\Apps\api_tareas\src\main\java\com\david\api_tareas\ServletInitializer.java

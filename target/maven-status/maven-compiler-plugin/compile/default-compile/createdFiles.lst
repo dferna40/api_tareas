@@ -1,0 +1,7 @@
+com\david\api_tareas\ServletInitializer.class
+com\david\api_tareas\dto\TareaDTO.class
+com\david\api_tareas\controller\TareaController.class
+com\david\api_tareas\service\TareaService.class
+com\david\api_tareas\model\Tarea.class
+com\david\api_tareas\ApiTareasApplication.class
+com\david\api_tareas\repository\TareaRepository.class
