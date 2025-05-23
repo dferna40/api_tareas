@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   mysql_tareas:
     image: mysql:8.0
@@ -28,10 +29,11 @@ services:
     ports:
       - "8081:8081"
     environment:
-	  SPRING_PROFILES_ACTIVE: docker  # <-- Aquí activamos el perfil
+      SPRING_PROFILES_ACTIVE: docker
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_tareas:3306/tareas_db
       SPRING_DATASOURCE_USERNAME: david
       SPRING_DATASOURCE_PASSWORD: 1234
 
 volumes:
   api_tareas_mysql_data:
+
