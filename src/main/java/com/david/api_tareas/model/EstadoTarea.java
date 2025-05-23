@@ -14,7 +14,8 @@ public class EstadoTarea {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(name = "id_estado_tarea")
+    private Long id_estadoTarea;
 	
 	@Column(name = "nombre_del_estado", nullable = false, unique = true)
 	@NotBlank(message = "El nombre del estado es obligatorio")
@@ -29,7 +30,7 @@ public class EstadoTarea {
 
     // Getters y Setters
     public Long getId() {
-        return id;
+        return id_estadoTarea;
     }
 
     public String getNombreDelEstado() {

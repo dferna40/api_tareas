@@ -2,10 +2,13 @@ package com.david.api_tareas.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.david.api_tareas.dto.output.TareaOutputDTO;
+import com.david.api_tareas.mapper.TareaMapper;
 import com.david.api_tareas.model.Tarea;
 import com.david.api_tareas.repository.TareaRepository;
 
@@ -29,5 +32,12 @@ public class TareaService {
 
     public void eliminar(Long id) {
         tareaRepository.deleteById(id);
+    }
+    
+    public List<TareaOutputDTO> obtenerTareasPorUsuario(Long usuarioId) {
+        List<Tarea> tareas = tareaRepository.findByUsuarioId(usuarioId);
+        return tareas.stream()
+                     .map(TareaMapper::toDTO)
+                     .collect(Collectors.toList());
     }
 }
