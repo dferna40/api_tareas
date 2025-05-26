@@ -2,7 +2,7 @@ package com.david.api_tareas.dto.output;
 
 public class TareaOutputDTO {
 
-	private Long id_tarea;
+	private Long id;
 	private String titulo;
 	private String descripcion;
 	private boolean completada;
@@ -10,10 +10,10 @@ public class TareaOutputDTO {
 	private EstadoTareaOutputDTO estadoTarea;
 	
 	public Long getId_tarea() {
-		return id_tarea;
+		return id;
 	}
 	public void setId_tarea(Long id_tarea) {
-		this.id_tarea = id_tarea;
+		this.id = id_tarea;
 	}
 	public String getTitulo() {
 		return titulo;

@@ -9,13 +9,13 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "estados_tarea")
+@Table(name = "estado_tarea")
 public class EstadoTarea {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_estado_tarea")
-    private Long id_estadoTarea;
+	@Column(name = "id", nullable = false, updatable = false)
+    private Long id;
 	
 	@Column(name = "nombre_del_estado", nullable = false, unique = true)
 	@NotBlank(message = "El nombre del estado es obligatorio")
@@ -24,13 +24,16 @@ public class EstadoTarea {
     // Constructores
     public EstadoTarea() {}
 
-    public EstadoTarea(String nombreDelEstado) {
-        this.nombreDelEstado = nombreDelEstado;
-    }
-
-    // Getters y Setters
     public Long getId() {
-        return id_estadoTarea;
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public EstadoTarea(String nombreDelEstado) {
+        this.nombreDelEstado = nombreDelEstado;
     }
 
     public String getNombreDelEstado() {

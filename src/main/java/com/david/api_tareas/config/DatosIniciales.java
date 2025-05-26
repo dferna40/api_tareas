@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.david.api_tareas.model.EstadoTarea;
 import com.david.api_tareas.repository.EstadoTareaRepository;
@@ -15,6 +16,7 @@ import com.david.api_tareas.repository.EstadoTareaRepository;
 public class DatosIniciales {
 
     @Bean
+    @Profile("!test") // 🚫 No se ejecuta en tests
     public CommandLineRunner cargarEstadosPorDefecto(EstadoTareaRepository estadoTareaRepository) {
         return args -> {
             System.out.println(">>> Ejecutando CommandLineRunner...");

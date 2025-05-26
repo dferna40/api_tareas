@@ -15,37 +15,31 @@ import jakarta.persistence.Table;
 public class Tarea {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_tarea")
-    private Long id_tarea;
+	@Column(name = "id" , nullable = false, updatable = false)
+    private Long id;
     private String titulo;
     private String descripcion;
     private boolean completada;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     // Relación con EstadoTarea (Muchos a Uno)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estado_tarea", nullable = false)
+    @JoinColumn(name = "estado_id", nullable = false)
     private EstadoTarea estadoTarea;
     
     public Tarea() {} 
     
-	public Tarea(Long id, String titulo, String descripcion, boolean completada) {
+	public Tarea(Long id_tarea, String titulo, String descripcion, boolean completada) {
 		super();
-		this.id_tarea = id;
+		this.id = id_tarea;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.completada = completada;
 	}
 
-	public Long getId() {
-		return id_tarea;
-	}
-	public void setId(Long id) {
-		this.id_tarea = id;
-	}
 	public String getTitulo() {
 		return titulo;
 	}
@@ -65,14 +59,6 @@ public class Tarea {
 		this.completada = completada;
 	}
 
-	public Long getId_tarea() {
-		return id_tarea;
-	}
-
-	public void setId_tarea(Long id_tarea) {
-		this.id_tarea = id_tarea;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -87,5 +73,13 @@ public class Tarea {
 
 	public void setEstadoTarea(EstadoTarea estadoTarea) {
 		this.estadoTarea = estadoTarea;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

@@ -10,15 +10,17 @@ public class UsuarioMapper {
 		UsuarioOutputDTO dto = new UsuarioOutputDTO();
 		dto.setId_usuario(usuario.getId());
 		dto.setNombre(usuario.getNombre());
-		dto.setDescripcion(usuario.getDescripcion());
+		dto.setDescripcion(usuario.getPuesto());
+		dto.setCorreo(usuario.getCorreo());
 		return dto;
 	}
 
 	public static Usuario toEntity(UsuarioInputDTO inputDTO) {
 		Usuario usuario = new Usuario();
 		usuario.setNombre(inputDTO.getNombre());
-		usuario.setDescripcion(inputDTO.getDescripcion());
+		usuario.setPuesto(inputDTO.getPuesto());
 		usuario.setPassword(inputDTO.getPassword());
+		usuario.setCorreo(inputDTO.getCorreo());
 		return usuario;
 	}
 

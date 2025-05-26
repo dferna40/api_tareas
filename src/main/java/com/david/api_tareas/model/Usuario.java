@@ -13,45 +13,60 @@ public class Usuario {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
-    private Long id_usuario;
+	@Column(name = "id", nullable = false, updatable = false)
+    private Long id;
     private String nombre;
-    private String descripcion;
+    private String puesto;
     private String password;
+    private String correo;
     
     public Usuario() {}
     
-	public Usuario(Long id, String nombre, String descripcion, String password) {
+	public Usuario(Long id, String nombre, String descripcion, String password, String correo) {
 		super();
-		this.id_usuario = id;
+		this.id = id;
 		this.nombre = nombre;
-		this.descripcion = descripcion;
+		this.puesto = descripcion;
 		this.password = password;
+		this.correo = correo;
 	}
 
-	public Long getId() {
-		return id_usuario;
-	}
-	public void setId(Long id) {
-		this.id_usuario = id;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getPuesto() {
+		return puesto;
+	}
+
+	public void setPuesto(String puesto) {
+		this.puesto = puesto;
 	}
     
     
