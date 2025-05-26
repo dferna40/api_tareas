@@ -1,12 +1,20 @@
 package com.david.api_tareas.model;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -19,6 +27,14 @@ public class Usuario {
     private String puesto;
     private String password;
     private String correo;
+    
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime fechaModificacion;
     
     public Usuario() {}
     
@@ -67,6 +83,22 @@ public class Usuario {
 
 	public void setPuesto(String puesto) {
 		this.puesto = puesto;
+	}
+
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public LocalDateTime getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
     
     

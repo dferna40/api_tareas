@@ -1,5 +1,7 @@
 package com.david.api_tareas.mapper;
 
+import java.time.LocalDateTime;
+
 import com.david.api_tareas.dto.input.TareaInputDTO;
 import com.david.api_tareas.dto.output.TareaOutputDTO;
 import com.david.api_tareas.model.EstadoTarea;
@@ -24,6 +26,8 @@ public class TareaMapper {
 		tarea.setDescripcion(dto.getDescripcion());
 		tarea.setUsuario(usuario);
 		tarea.setEstadoTarea(estadoTarea);
+		tarea.setFechaCreacion(LocalDateTime.now());
+		tarea.setFechaModificacion(LocalDateTime.now());
 		return tarea;
 	}
 

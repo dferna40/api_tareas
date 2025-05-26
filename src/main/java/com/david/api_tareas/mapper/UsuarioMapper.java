@@ -1,5 +1,7 @@
 package com.david.api_tareas.mapper;
 
+import java.time.LocalDateTime;
+
 import com.david.api_tareas.dto.input.UsuarioInputDTO;
 import com.david.api_tareas.dto.output.UsuarioOutputDTO;
 import com.david.api_tareas.model.Usuario;
@@ -21,6 +23,8 @@ public class UsuarioMapper {
 		usuario.setPuesto(inputDTO.getPuesto());
 		usuario.setPassword(inputDTO.getPassword());
 		usuario.setCorreo(inputDTO.getCorreo());
+		usuario.setFechaCreacion(LocalDateTime.now());
+		usuario.setFechaModificacion(LocalDateTime.now());
 		return usuario;
 	}
 
