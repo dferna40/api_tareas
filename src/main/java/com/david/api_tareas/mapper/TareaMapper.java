@@ -12,7 +12,7 @@ public class TareaMapper {
 
 	public static TareaOutputDTO toDTO(Tarea tarea) {
 		TareaOutputDTO dto = new TareaOutputDTO();
-		dto.setId_tarea(tarea.getId());
+		dto.setId(tarea.getId());
 		dto.setTitulo(tarea.getTitulo());
 		dto.setDescripcion(tarea.getDescripcion());
 		dto.setUsuario(UsuarioMapper.toDTO(tarea.getUsuario()));
@@ -21,14 +21,18 @@ public class TareaMapper {
 	}
 
 	public static Tarea toEntity(TareaInputDTO dto, Usuario usuario, EstadoTarea estadoTarea) {
-		Tarea tarea = new Tarea();
-		tarea.setTitulo(dto.getTitulo());
-		tarea.setDescripcion(dto.getDescripcion());
-		tarea.setUsuario(usuario);
-		tarea.setEstadoTarea(estadoTarea);
-		tarea.setFechaCreacion(LocalDateTime.now());
-		tarea.setFechaModificacion(LocalDateTime.now());
-		return tarea;
+	    Tarea tarea = new Tarea();
+	    
+	    tarea.setTitulo(dto.getTitulo());
+	    tarea.setDescripcion(dto.getDescripcion());
+	    tarea.setUsuarioId(usuario.getId());               // 🔥 Clave para que se inserte bien
+	    tarea.setEstadoTareaId(estadoTarea.getId());       // 🔥 Clave para que se inserte bien
+	    tarea.setUsuario(usuario);                         // solo para lectura si necesitas en el DTO de salida
+	    tarea.setEstadoTarea(estadoTarea);                 // solo para lectura si necesitas en el DTO de salida
+	    tarea.setFechaCreacion(LocalDateTime.now());
+	    tarea.setFechaModificacion(LocalDateTime.now());
+	    
+	    return tarea;
 	}
 
 }

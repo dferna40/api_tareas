@@ -10,9 +10,9 @@ public class UsuarioMapper {
 
 	public static UsuarioOutputDTO toDTO(Usuario usuario) {
 		UsuarioOutputDTO dto = new UsuarioOutputDTO();
-		dto.setId_usuario(usuario.getId());
+		dto.setId(usuario.getId());
 		dto.setNombre(usuario.getNombre());
-		dto.setDescripcion(usuario.getPuesto());
+		dto.setPuesto(usuario.getPuesto());
 		dto.setCorreo(usuario.getCorreo());
 		return dto;
 	}

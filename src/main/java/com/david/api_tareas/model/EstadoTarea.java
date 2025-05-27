@@ -14,10 +14,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-@Table(name = "estado_tarea")
+@Table(name = "estados_tarea")
+@EntityListeners(AuditingEntityListener.class)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EstadoTarea {
 	
 	@Id
@@ -36,45 +44,9 @@ public class EstadoTarea {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime fechaModificacion;
-
-    // Constructores
-    public EstadoTarea() {}
-
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public EstadoTarea(String nombreDelEstado) {
-        this.nombreDelEstado = nombreDelEstado;
-    }
-
-    public String getNombreDelEstado() {
-        return nombreDelEstado;
-    }
-
-    public void setNombreDelEstado(String nombreDelEstado) {
-        this.nombreDelEstado = nombreDelEstado;
-    }
-
-	public LocalDateTime getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	public void setFechaCreacion(LocalDateTime fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	public LocalDateTime getFechaModificacion() {
-		return fechaModificacion;
-	}
-
-	public void setFechaModificacion(LocalDateTime fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
     
-
+ // Constructor personalizado
+    public EstadoTarea(String nombreDelEstado) {
+        this.nombreDelEstado = nombreDelEstado;
+    }
 }
