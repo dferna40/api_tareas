@@ -44,6 +44,5 @@ public class Usuario {
 
     // 👇 Rompemos el ciclo para que Swagger no reviente
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Tarea> tareas;
 }

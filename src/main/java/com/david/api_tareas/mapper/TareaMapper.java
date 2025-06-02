@@ -25,45 +25,19 @@ public class TareaMapper {
 
     public static Tarea toEntity(TareaInputDTO dto, Usuario usuario, EstadoTarea estadoTarea) {
         Tarea tarea = new Tarea();
-
         tarea.setTitulo(dto.getTitulo());
         tarea.setDescripcion(dto.getDescripcion());
         tarea.setCompletada(dto.isCompletada());
 
-        // Relaciones clave
-        tarea.setUsuarioId(usuario.getId());
-        tarea.setEstadoTareaId(estadoTarea.getId());
-
-        // Relaciones solo para lectura (útil en toDTO)
+        // ✅ Relaciones principales (Hibernate usará estas para persistir)
         tarea.setUsuario(usuario);
         tarea.setEstadoTarea(estadoTarea);
 
-        // Fechas
+        // ✅ Fechas manuales si no usas auditoría en persist
         tarea.setFechaCreacion(LocalDateTime.now());
         tarea.setFechaModificacion(LocalDateTime.now());
 
         return tarea;
     }
-    
-    public static Tarea toEntity(TareaInputDTO dto) {
-    	Tarea tarea = new Tarea();
-    	
-    	tarea.setTitulo(dto.getTitulo());
-        tarea.setDescripcion(dto.getDescripcion());
-        tarea.setCompletada(dto.isCompletada());
 
-        // Relaciones clave
-//        tarea.setUsuarioId(usuario.getId());
-//        tarea.setEstadoTareaId(estadoTarea.getId());
-//
-//        // Relaciones solo para lectura (útil en toDTO)
-//        tarea.setUsuario(usuario);
-//        tarea.setEstadoTarea(estadoTarea);
-
-        // Fechas
-        tarea.setFechaCreacion(LocalDateTime.now());
-        tarea.setFechaModificacion(LocalDateTime.now());
-    	
-    	return tarea;
-    }
 }

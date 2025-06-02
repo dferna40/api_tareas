@@ -6,8 +6,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,20 +49,19 @@ public class Tarea {
     @Column(nullable = false)
     private LocalDateTime fechaModificacion;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
-
-    @Column(name = "estado_id", nullable = false)
-    private Long estadoTareaId;
-
-    // 👇 Relaciones solo para lectura (y con @JsonIgnore para evitar el error 500 en Swagger)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", insertable = false, updatable = false)
-    @JsonIgnore
+    // ✅ Relaciones principales gestionadas por Hibernate
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estado_id", insertable = false, updatable = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "estado_id", nullable = false)
     private EstadoTarea estadoTarea;
+
+    // ✅ IDs solo para lectura opcional (por si los necesitas en DTOs)
+    @Column(name = "usuario_id", insertable = false, updatable = false)
+    private Long usuarioId;
+
+    @Column(name = "estado_id", insertable = false, updatable = false)
+    private Long estadoTareaId;
 }

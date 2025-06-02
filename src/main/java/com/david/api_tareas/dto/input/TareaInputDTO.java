@@ -23,10 +23,10 @@ public class TareaInputDTO {
     private String descripcion;
 
     @NotNull(message = "El ID del usuario es obligatorio")
-    private Long idUsuario;
+    private Long usuarioId;
 
     @NotNull(message = "Debe especificarse el ID del estado de la tarea")
-    private Long idEstadoTarea;
+    private Long estadoTareaId;
     
     private boolean completada;
 }
