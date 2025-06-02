@@ -27,4 +27,6 @@ public class TareaInputDTO {
 
     @NotNull(message = "Debe especificarse el ID del estado de la tarea")
     private Long idEstadoTarea;
+    
+    private boolean completada;
 }

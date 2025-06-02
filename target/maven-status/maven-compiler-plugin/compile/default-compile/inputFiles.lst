@@ -1,7 +1,10 @@
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\ApiTareasApplication.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\config\DatosIniciales.java
+D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\config\JacksonConfig.java
+D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\config\SecurityConfig.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\config\ServletInitializer.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\controller\EstadoTareaController.java
+D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\controller\PingController.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\controller\TareaController.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\controller\UsuarioController.java
 D:\David_desarollo\api_tareas\src\main\java\com\david\api_tareas\dto\input\EstadoTareaInputDTO.java

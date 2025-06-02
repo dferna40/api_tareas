@@ -8,24 +8,23 @@ import com.david.api_tareas.model.Usuario;
 
 public class UsuarioMapper {
 
-	public static UsuarioOutputDTO toDTO(Usuario usuario) {
-		UsuarioOutputDTO dto = new UsuarioOutputDTO();
-		dto.setId(usuario.getId());
-		dto.setNombre(usuario.getNombre());
-		dto.setPuesto(usuario.getPuesto());
-		dto.setCorreo(usuario.getCorreo());
-		return dto;
-	}
+    public static UsuarioOutputDTO toDTO(Usuario usuario) {
+        UsuarioOutputDTO dto = new UsuarioOutputDTO();
+        dto.setId(usuario.getId());
+        dto.setNombre(usuario.getNombre());
+        dto.setPuesto(usuario.getPuesto());
+        dto.setCorreo(usuario.getCorreo());
+        return dto;
+    }
 
-	public static Usuario toEntity(UsuarioInputDTO inputDTO) {
-		Usuario usuario = new Usuario();
-		usuario.setNombre(inputDTO.getNombre());
-		usuario.setPuesto(inputDTO.getPuesto());
-		usuario.setPassword(inputDTO.getPassword());
-		usuario.setCorreo(inputDTO.getCorreo());
-		usuario.setFechaCreacion(LocalDateTime.now());
-		usuario.setFechaModificacion(LocalDateTime.now());
-		return usuario;
-	}
-
+    public static Usuario toEntity(UsuarioInputDTO inputDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setNombre(inputDTO.getNombre());
+        usuario.setPuesto(inputDTO.getPuesto());
+        usuario.setPassword(inputDTO.getPassword()); // se encripta después en el service
+        usuario.setCorreo(inputDTO.getCorreo());
+        usuario.setFechaCreacion(LocalDateTime.now());
+        usuario.setFechaModificacion(LocalDateTime.now());
+        return usuario;
+    }
 }

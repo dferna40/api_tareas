@@ -22,25 +22,21 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 @Tag(name = "Usuarios", description = "Operaciones relacionadas con usuarios")
 public class UsuarioController {
 
 	@Autowired
     private UsuarioService usuarioService;
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 
-	@PostMapping
-	@Operation(summary = "Crear usuario")
-	public ResponseEntity<UsuarioOutputDTO> crear(@Valid @RequestBody UsuarioInputDTO dto) {
-	    Usuario usuario = UsuarioMapper.toEntity(dto);
-	    Usuario guardado = usuarioRepository.save(usuario);
-	    return ResponseEntity.ok(UsuarioMapper.toDTO(guardado));
-	}
-    
-    @GetMapping("/usuarios")
+    @PostMapping
+    @Operation(summary = "Crear usuario")
+    public ResponseEntity<UsuarioOutputDTO> crear(@Valid @RequestBody UsuarioInputDTO dto) {
+        UsuarioOutputDTO nuevoUsuario = usuarioService.crearUsuario(dto);
+        return ResponseEntity.ok(nuevoUsuario);
+    }
+
+    @GetMapping
     @Operation(summary = "Listar todos los usuarios")
     public ResponseEntity<List<UsuarioOutputDTO>> listarUsuarios() {
         List<UsuarioOutputDTO> usuarios = usuarioService.obtenerTodosLosUsuarios();

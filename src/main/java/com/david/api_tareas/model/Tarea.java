@@ -1,13 +1,30 @@
 package com.david.api_tareas.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Schema(description = "Entidad que representa las tareas")
 @Entity
 @Table(name = "tareas")
 @EntityListeners(AuditingEntityListener.class)
@@ -34,19 +51,20 @@ public class Tarea {
     @Column(nullable = false)
     private LocalDateTime fechaModificacion;
 
-    // IDs que se usarán para insertar datos
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
 
     @Column(name = "estado_id", nullable = false)
     private Long estadoTareaId;
 
-    // Relaciones solo para lectura, no para inserts/updates
+    // 👇 Relaciones solo para lectura (y con @JsonIgnore para evitar el error 500 en Swagger)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id", insertable = false, updatable = false)
+    @JsonIgnore
     private EstadoTarea estadoTarea;
 }
