@@ -13,7 +13,7 @@ public class UsuarioMapper {
         dto.setId(usuario.getId());
         dto.setNombre(usuario.getNombre());
         dto.setPuesto(usuario.getPuesto());
-        dto.setCorreo(usuario.getCorreo());
+        dto.setEmail(usuario.getEmail());
         return dto;
     }
 
@@ -22,7 +22,7 @@ public class UsuarioMapper {
         usuario.setNombre(inputDTO.getNombre());
         usuario.setPuesto(inputDTO.getPuesto());
         usuario.setPassword(inputDTO.getPassword()); // se encripta después en el service
-        usuario.setCorreo(inputDTO.getCorreo());
+        usuario.setEmail(inputDTO.getEmail());
         usuario.setFechaCreacion(LocalDateTime.now());
         usuario.setFechaModificacion(LocalDateTime.now());
         return usuario;

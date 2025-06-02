@@ -32,7 +32,6 @@ public class Usuario {
     private String email;
     private String puesto;
     private String password;
-    private String correo;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

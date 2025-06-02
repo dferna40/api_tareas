@@ -26,5 +26,5 @@ public class UsuarioInputDTO {
     
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "Debe ser un correo electrónico válido")
-    private String correo;
+    private String email;
 }

@@ -16,7 +16,7 @@ public class UsuarioOutputDTO {
 	private Long id;
 	private String nombre;
 	private String puesto;
-	private String correo;
+	private String email;
 	private LocalDateTime fechaModificacion;
 	private LocalDateTime fechaCreacion;
 }
