@@ -1,4 +1,4 @@
-# auth-service
+# api_tareas
 
 API REST desarrollado con Spring Boot.
 

@@ -26,13 +26,13 @@ public class UsuarioController {
 	@Autowired
     private UsuarioService usuarioService; // Servicio que contiene la lógica de negocio relacionada con usuarios
 
-    @PostMapping
-    @Operation(summary = "Crear usuario") // Endpoint para registrar un nuevo usuario
-    public ResponseEntity<UsuarioOutputDTO> crear(@Valid @RequestBody UsuarioInputDTO dto) {
-        // Llama al servicio para crear un nuevo usuario y devuelve el DTO de salida
-        UsuarioOutputDTO nuevoUsuario = usuarioService.crearUsuario(dto);
-        return ResponseEntity.ok(nuevoUsuario); // Devuelve HTTP 200 con el usuario creado
-    }
+//    @PostMapping
+//    @Operation(summary = "Crear usuario") // Endpoint para registrar un nuevo usuario
+//    public ResponseEntity<UsuarioOutputDTO> crear(@Valid @RequestBody UsuarioInputDTO dto) {
+//        // Llama al servicio para crear un nuevo usuario y devuelve el DTO de salida
+//        UsuarioOutputDTO nuevoUsuario = usuarioService.crearUsuario(dto);
+//        return ResponseEntity.ok(nuevoUsuario); // Devuelve HTTP 200 con el usuario creado
+//    }
 
     @GetMapping
     @Operation(summary = "Listar todos los usuarios") // Endpoint para obtener la lista de todos los usuarios
