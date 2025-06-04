@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.david.api_tareas.dto.input.TareaInputDTO;
@@ -81,4 +82,11 @@ public class TareaController {
     public ResponseEntity<Page<TareaOutputDTO>> listarPaginadas(Pageable pageable) {
         return ResponseEntity.ok(tareaService.listarPaginadas(pageable));
     }
+    
+    @GetMapping("/mis-tareas")
+    public ResponseEntity<?> getTareasDelUsuario(Authentication authentication) {
+        String username = authentication.getName(); // ← del token JWT
+        return ResponseEntity.ok("Hola, " + username);
+    }
+
 }
