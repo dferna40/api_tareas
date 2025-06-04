@@ -22,43 +22,44 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Schema(description = "Entidad que representa las tareas")
-@Entity
-@Table(name = "tareas")
-@EntityListeners(AuditingEntityListener.class)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Schema(description = "Entidad que representa las tareas") // Documentación para Swagger
+@Entity // Marca esta clase como una entidad JPA
+@Table(name = "tareas") // Nombre de la tabla en la base de datos
+@EntityListeners(AuditingEntityListener.class) // Habilita las anotaciones de auditoría
+@Data // Genera automáticamente getters, setters, equals, hashCode y toString
+@NoArgsConstructor // Constructor sin argumentos
+@AllArgsConstructor // Constructor con todos los argumentos
+@Builder // Permite construir objetos con patrón builder
 public class Tarea {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática del ID
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    private String titulo;
-    private String descripcion;
-    private boolean completada;
+    private String titulo; // Título de la tarea
+    private String descripcion; // Descripción detallada de la tarea
+    private boolean completada; // Indicador de si la tarea está finalizada
 
-    @CreatedDate
+    @CreatedDate // Fecha de creación automática (requiere @EnableJpaAuditing)
     @Column(nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
-    @LastModifiedDate
+    @LastModifiedDate // Fecha de modificación automática
     @Column(nullable = false)
     private LocalDateTime fechaModificacion;
 
-    // ✅ Relaciones principales gestionadas por Hibernate
+    // ✅ Relación con el usuario que creó o es responsable de la tarea
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
+    // ✅ Relación con el estado actual de la tarea
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "estado_id", nullable = false)
     private EstadoTarea estadoTarea;
 
-    // ✅ IDs solo para lectura opcional (por si los necesitas en DTOs)
+    // ✅ Campos opcionales para acceder directamente a los IDs sin cargar los objetos completos
     @Column(name = "usuario_id", insertable = false, updatable = false)
     private Long usuarioId;
 

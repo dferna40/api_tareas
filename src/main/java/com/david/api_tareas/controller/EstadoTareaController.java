@@ -14,17 +14,18 @@ import com.david.api_tareas.service.EstadoTareaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RestController
-@RequestMapping("/estadoTareas")
-@Tag(name = "Estado tarea", description = "Operaciones relacionadas con los estados de la tarea")
+@RestController // Indica que esta clase es un controlador REST y sus métodos retornan datos directamente (JSON)
+@RequestMapping("/estadoTareas") // Define la URL base para todas las rutas de este controlador
+@Tag(name = "Estado tarea", description = "Operaciones relacionadas con los estados de la tarea") // Documentación para Swagger
 public class EstadoTareaController {
 
 	@Autowired
-    private EstadoTareaService estadoTareaService;
+    private EstadoTareaService estadoTareaService; // Servicio que gestiona la lógica relacionada con los estados de tarea
 	
-	@GetMapping
-    @Operation(summary = "Listar todos los estados de la tarea")
+	@GetMapping // Maneja las peticiones GET a la URL /estadoTareas
+    @Operation(summary = "Listar todos los estados de la tarea") // Descripción breve para Swagger
     public ResponseEntity<List<EstadoTareaOutputDTO>> listar() {
+        // Llama al servicio para obtener todos los estados y los retorna con HTTP 200 OK
         return ResponseEntity.ok(estadoTareaService.listarTodas());
     }
 }

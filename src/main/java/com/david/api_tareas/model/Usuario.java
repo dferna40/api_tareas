@@ -13,35 +13,37 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Schema(description = "Entidad que representa un usuario del sistema")
-@Entity
-@Table(name = "usuarios")
-@EntityListeners(AuditingEntityListener.class)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Schema(description = "Entidad que representa un usuario del sistema") // Documentación Swagger
+@Entity // Indica que esta clase es una entidad JPA
+@Table(name = "usuarios") // Nombre de la tabla en la base de datos
+@EntityListeners(AuditingEntityListener.class) // Permite que se gestionen automáticamente las fechas de auditoría
+@Data // Genera automáticamente getters, setters, equals, hashCode y toString
+@NoArgsConstructor // Constructor sin argumentos
+@AllArgsConstructor // Constructor con todos los argumentos
+@Builder // Permite construir objetos con el patrón builder
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Clave primaria
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Autoincremental
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    private String nombre;
-    private String email;
-    private String puesto;
-    private String password;
+    private String nombre; // Nombre del usuario
+    private String email; // Correo electrónico del usuario
+    private String puesto; // Descripción del rol o cargo del usuario
+    private String password; // Contraseña del usuario (⚠️ nunca devolver en los DTO de salida)
 
-    @CreatedDate
+    @CreatedDate // Fecha de creación (autoasignada por Spring si se activa la auditoría)
     @Column(nullable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 
-    @LastModifiedDate
+    @LastModifiedDate // Fecha de última modificación (autoasignada por Spring)
     @Column(nullable = false)
     private LocalDateTime fechaModificacion;
 
-    // 👇 Rompemos el ciclo para que Swagger no reviente
+    // 👇 Relación uno a muchos: un usuario puede tener muchas tareas asociadas
+    // mappedBy = "usuario" → indica el campo en la clase Tarea que representa esta relación
+    // LAZY → no carga las tareas automáticamente (mejor rendimiento)
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Tarea> tareas;
 }
