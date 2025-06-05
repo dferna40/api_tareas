@@ -36,7 +36,7 @@ services:
 
   auth_service:
     build:
-      context: ../auth-service # asegúrate de que la ruta es correcta
+      context: ../auth-service
     container_name: auth_service
     depends_on:
       mysql_tareas:
@@ -48,6 +48,23 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_tareas:3306/tareas_db
       SPRING_DATASOURCE_USERNAME: david
       SPRING_DATASOURCE_PASSWORD: 1234
+
+  tareas_app:
+    build:
+      context: ../tareas-app
+    container_name: tareas_app
+    ports:
+      - "3100:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ../tareas-app:/app
+      - /app/node_modules
+    depends_on:
+      - auth_service
+      - springboot_tareas
+    env_file:
+      - ../tareas-app/.env.docker
 
 volumes:
   api_tareas_mysql_data:
