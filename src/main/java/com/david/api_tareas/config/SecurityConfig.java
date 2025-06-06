@@ -12,41 +12,60 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@Configuration // Marca esta clase como una fuente de configuración
-@EnableWebSecurity // Habilita la seguridad web de Spring Security
+import java.util.List;
+
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
-	
-	// Bean que define el encoder de contraseñas usando BCrypt (ideal para almacenar contraseñas cifradas)
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
 
-	// Configura la cadena de filtros de seguridad de Spring
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
-	    return http
-	            .csrf(csrf -> csrf.disable()) // Desactiva CSRF (útil en APIs REST)
-	            .authorizeHttpRequests(auth -> auth
-	                    // Estas rutas son públicas (no requieren autenticación)
-	                    .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-	                    // Todas las demás rutas requieren autenticación
-	                    .anyRequest().authenticated()
-	            )
-	            // Añade el filtro JWT personalizado antes del filtro por defecto de usuario/contraseña
-	            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-	            .build();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	// Bean que define un usuario en memoria (solo para pruebas rápidas o desarrollo)
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ habilitar CORS correctamente
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                            "/auth/**",
+                            "/puestos/**",
+                            "/usuarios/**", // ✅ temporalmente público para depurar
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("admin")
-            .password("admin123") // ⚠️ Esta contraseña está sin cifrar: solo para pruebas
-            .roles("USER")
-            .build();
+                .password("{noop}admin123") // ⚠️ Agregado {noop} para no cifrada temporal
+                .roles("USER")
+                .build();
         return new InMemoryUserDetailsManager(user);
     }
 
+    // ✅ Configuración CORS compatible con Spring Security
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // origen del frontend
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true); // permite enviar cookies o headers como Authorization
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

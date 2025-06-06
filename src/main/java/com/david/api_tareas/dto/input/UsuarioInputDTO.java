@@ -18,8 +18,8 @@ public class UsuarioInputDTO {
     @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres") // Longitud mínima y máxima
     private String nombre;
 
-    @NotBlank(message = "La descripción del usuario es obligatoria") // El campo "puesto" no puede estar vacío
-    private String puesto;
+    
+    private Long puestoId;
 
     @NotBlank(message = "La contraseña es obligatoria") // La contraseña es obligatoria (puedes añadir validaciones de fuerza si lo deseas)
     private String password;

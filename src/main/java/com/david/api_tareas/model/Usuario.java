@@ -30,8 +30,9 @@ public class Usuario {
 
     private String nombre; // Nombre del usuario
     private String email; // Correo electrónico del usuario
-    private String puesto; // Descripción del rol o cargo del usuario
     private String password; // Contraseña del usuario (⚠️ nunca devolver en los DTO de salida)
+    @Column(nullable = false)
+    private String role = "USER";
 
     @CreatedDate // Fecha de creación (autoasignada por Spring si se activa la auditoría)
     @Column(nullable = false, updatable = false)
@@ -46,4 +47,8 @@ public class Usuario {
     // LAZY → no carga las tareas automáticamente (mejor rendimiento)
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Tarea> tareas;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "puesto_id")
+    private Puesto puesto;
 }

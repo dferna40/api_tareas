@@ -15,7 +15,7 @@ public class UsuarioOutputDTO {
 
 	private Long id; // Identificador único del usuario
 	private String nombre; // Nombre del usuario
-	private String puesto; // Cargo o función que desempeña el usuario
+	private PuestoOutputDTO puesto; // Cargo o función que desempeña el usuario
 	private String email; // Correo electrónico del usuario
 	private LocalDateTime fechaModificacion; // Fecha y hora de la última modificación del usuario
 	private LocalDateTime fechaCreacion; // Fecha y hora en que se creó el usuario
