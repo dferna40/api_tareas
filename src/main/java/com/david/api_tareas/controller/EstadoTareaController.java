@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController // Indica que esta clase es un controlador REST y sus métodos retornan datos directamente (JSON)
-@RequestMapping("/estadoTareas") // Define la URL base para todas las rutas de este controlador
+@RequestMapping("api/estadoTareas") // Define la URL base para todas las rutas de este controlador
 @Tag(name = "Estado tarea", description = "Operaciones relacionadas con los estados de la tarea") // Documentación para Swagger
 public class EstadoTareaController {
 

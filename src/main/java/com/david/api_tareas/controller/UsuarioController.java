@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("api/usuarios")
 @Tag(name = "Usuarios", description = "Gestión del perfil de usuarios (no login)")
 public class UsuarioController {
 

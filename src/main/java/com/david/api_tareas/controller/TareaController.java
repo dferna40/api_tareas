@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController // Marca esta clase como un controlador REST
-@RequestMapping("/tareas") // Ruta base: /tareas
+@RequestMapping("api/tareas") // Ruta base: /tareas
 @Tag(name = "Tareas", description = "Operaciones relacionadas con las tareas") // Documentación para Swagger
 public class TareaController {
 
